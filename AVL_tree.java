@@ -15,6 +15,7 @@ public class AVL_tree {
         System.out.println("/ \\");
         System.out.println(tree.root.l.word + " " + tree.root.r.word);
         System.out.println("Height = " + tree.height);
+        System.out.println("Balance hight of " + tree.root.word + " = " + tree.root.Bh);
         
         tree.search(tree.root, "c");
     }
