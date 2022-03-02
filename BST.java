@@ -1,5 +1,5 @@
 public class BST {
-    
+
     public Node root = null;
     public int height;
     public int heightOfInsert;
@@ -35,5 +35,20 @@ public class BST {
             rNode.p = node;
         }
         return node;
+    }
+
+    public void search(Node node, String word){
+        if(node == null){
+            System.out.println(word + ": NO");
+        }
+        else if (word.charAt(0) == node.word.charAt(0)){
+            System.out.println(word + ": YES");
+        }
+        else if (word.charAt(0) > node.word.charAt(0)){
+            search(node.l, word);
+        }
+        else if (word.charAt(0) < node.word.charAt(0)){
+            search(node.r, word);
+        }
     }
 }
