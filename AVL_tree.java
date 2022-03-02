@@ -11,8 +11,10 @@ public class AVL_tree {
         tree.insert(tree.root, "e");
         tree.insert(tree.root, "b");
         tree.insert(tree.root, "h");
-        System.out.println(tree.root.word +", "+ tree.root.r.word);
-
+        System.out.println(" " + tree.root.word);
+        System.out.println("/ \\");
+        System.out.println(tree.root.l.word + " " + tree.root.r.word);
+        System.out.println("Height = " + tree.height);
         
     }
 }

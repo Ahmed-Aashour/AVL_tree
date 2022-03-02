@@ -2,11 +2,13 @@
 public class Node {
     
     public String word; //data
-    public Node p; //parent
-    public Node l; //left child
-    public Node r; //right child
+    public Node p;      //parent
+    public Node l;      //left child
+    public Node r;      //right child
+    public int h;       //height of the subtree (if root --> height of the tree)
+    public int Bh = 0;  //balance height of the node
 
-    //contruction
+    //contructors
     public Node(){
         this.word = null;
         this.p = null;
