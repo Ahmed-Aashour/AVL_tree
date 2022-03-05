@@ -146,10 +146,10 @@ public class BST {
             return node;
         }
         else if (word.charAt(0) < node.word.charAt(0)){
-            search(node.l, word);
+            node = search(node.l, word);
         }
         else if (word.charAt(0) > node.word.charAt(0)){
-            search(node.r, word);
+            node = search(node.r, word);
         }
         return node;
     }

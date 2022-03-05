@@ -21,6 +21,7 @@ public class AVL_tree {
         System.out.println("Height of " + tree.root.word + " = " + tree.root.h);
         System.out.println("Balance Factor of " + tree.root.r.word + " = " + tree.root.r.Bf);
         
-        tree.search(tree.root, "c");
+        Node wanted = tree.search(tree.root, "c");
+        System.out.println(wanted.word);
     }
 }
