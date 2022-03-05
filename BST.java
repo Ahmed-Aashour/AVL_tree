@@ -77,6 +77,7 @@ public class BST {
     private Node LeftRotation(Node node) {
         Node pivot = node;
         Node rNode = node.r;
+        if(rNode.l != null) rNode.l.p = pivot;
         rNode.p = pivot.p;
         pivot.p = rNode;
         pivot.r = rNode.l;
@@ -93,6 +94,7 @@ public class BST {
     private Node RightRotation(Node node) {
         Node pivot = node;
         Node lNode = node.l;
+        if(lNode.r != null) lNode.r.p = pivot;
         lNode.p = pivot.p;
         pivot.p = lNode;
         pivot.l = lNode.r;
@@ -275,7 +277,7 @@ public class BST {
             System.out.print(node.word + " ");
             if(node.p != null)
             {
-                System.out.print("parent is "+ node.p.word + " ");
+                System.out.println("parent is "+ node.p.word + " ");
             }
             preOrder(node.l);
             preOrder(node.r);
