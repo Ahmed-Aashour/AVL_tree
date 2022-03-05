@@ -153,4 +153,133 @@ public class BST {
         }
         return node;
     }
+    public void delete(String word){
+        Node node = this.search(this.root, word);
+        //if the word to be deleted is null return
+        if(node == null){
+            return;
+        }
+        else
+        {
+            //if the node has no children
+            Node parent = node.p;
+            if(node.l == null && node.r == null)
+            {
+                if(node == this.root)
+                {
+                    this.root = null;
+                }
+                else
+                {
+                    if(parent.l == node){parent.l = null;}
+                    else{parent.r = null;}
+                    node.p = null;
+                    this.update_balance_factor(parent);
+                    this.balanceDeletion(parent);
+                    this.update_height(parent);
+                }
+                return;
+            }
+            //if the node have two children the successor wil be the minimum value in the right subtree
+            else if(node.l != null && node.r != null)
+            {
+                Node successor = this.findMin(node.r);
+                String temp = successor.word;
+                this.delete(successor.word);
+                node.word = temp;
+                this.update_balance_factor(node);
+                this.balanceDeletion(node);
+                this.update_height(node);
+            }
+            //if the node have only one child
+            else
+            {
+                Node child = node.l == null? node.r : node.l;
+                child.p = parent;
+                if(node == this.root)
+                {
+                    this.root = child;
+                    this.root.p = null;
+                }
+                if(parent.l == node){
+                    parent.l = child;   
+                }
+                else{parent.r = child;}
+                node.p = null;
+                this.update_balance_factor(parent);
+                this.balanceDeletion(parent);
+                this.update_height(child);
+                this.update_height(parent);
+            }
+        }
+    }
+
+    private void balanceDeletion(Node node)
+    {
+        if(node.Bf > 1)
+        {
+            System.out.print("deletion balance needed for ");
+            System.out.println(node.word);
+            if(node.l != null && node.l.Bf >= 0)
+            {
+                //left left case do right rotation for this node
+                this.RightRotation(node);
+                System.out.println("left left");
+
+            }
+            else if(node.l != null && node.l.Bf < 0)
+            {
+                //left right rotation 
+                //do a left rotation at left child of current node followed
+                //by a right rotation at the current node itself.
+                this.Left_RightRotation(node);
+                System.out.println("left right");
+            }
+        }
+
+        if(node.Bf < -1)
+        {
+            System.out.print("deletion balance needed for ");
+            System.out.println(node.word);
+            if(node.r != null && node.r.Bf >= 0)
+            {
+                //left left case do right rotation for this node
+                this.LeftRotation(node);
+                System.out.println("right right");
+
+            }
+            else if(node.r != null && node.r.Bf < 0)
+            {
+                //left right rotation 
+                //do a left rotation at left child of current node followed
+                //by a right rotation at the current node itself.
+                this.Right_LeftRotation(node);
+                System.out.println("rigth left");
+            }
+        }
+    }
+
+    private Node findMin(Node node)
+    {
+        if(node.l != null){
+            node = node.l;
+        }
+        return node;
+    }
+
+    // method used for debuggig purpose only
+    public void preOrder(Node node)
+    {
+        if (node != null)
+        {
+            System.out.print(node.word + " ");
+            if(node.p != null)
+            {
+                System.out.print("parent is "+ node.p.word + " ");
+            }
+            preOrder(node.l);
+            preOrder(node.r);
+        }
+    }
+
 }
