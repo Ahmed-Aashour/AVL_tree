@@ -6,7 +6,7 @@ public class Node {
     public Node l;      //left child
     public Node r;      //right child
     public int h = 0;  //height of the subtree (if root --> height of the tree)
-    public int Bh = 0;  //balance height of the node (Height<leftSubtree> - Height<rightSubtree>)
+    public int Bf = 0;  //balance factor of the node (Height<leftSubtree> - Height<rightSubtree>)
 
     //contructors
     public Node(){
