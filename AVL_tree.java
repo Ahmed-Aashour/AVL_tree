@@ -7,13 +7,17 @@ public class AVL_tree {
 
     public static void main(String[] args) {
         BST tree = new BST();
-        tree.insert(tree.root, "a");
-        tree.insert(tree.root, "c");
-        tree.insert(tree.root, "b");
-        tree.insert(tree.root, "d");
-        tree.insert(tree.root, "e");
-        tree.insert(tree.root, "f");
-        // tree.delete("b");
+        tree.insert(tree.root, "car");
+        tree.insert(tree.root, "tack");
+        tree.insert(tree.root, "tacj");
+        tree.insert(tree.root, "fort");
+        tree.insert(tree.root, "big");
+        tree.insert(tree.root, "bat");
+        tree.insert(tree.root, "lama");
+        // tree.insert(tree.root, "s");
+        // tree.insert(tree.root, "b");
+        // tree.insert(tree.root, "e");
+        // tree.delete("big");
         tree.preOrder(tree.root);
         // System.out.println("  " + tree.root.word);
         // System.out.println(" / \\");

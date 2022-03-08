@@ -28,12 +28,12 @@ public class BST {
         }
         else{
             heightOfInsert++;
-            if (word.charAt(0) < node.word.charAt(0)){
+            if (word.compareTo(node.word) < 0){
                 Node lNode = insert(node.l, word); //GOTO left child
                 node.l = lNode; //Parent link
                 lNode.p = node; 
             }
-            else if (word.charAt(0) > node.word.charAt(0)){
+            else if (word.compareTo(node.word) > 0){
                 Node rNode = insert(node.r, word); //GOTO right child
                 node.r = rNode; //Parent link
                 rNode.p = node;
@@ -45,7 +45,7 @@ public class BST {
             update_balance_factor(node);
             //performing Rotations
             if (node.Bf == -2){ //right-?
-                if (word.charAt(0) > node.r.word.charAt(0)){ //right
+                if (word.compareTo(node.r.word) > 0){ //right
                     System.out.println("Left Rotation Performed!!");
                     if(node == root) root = node.r;
                     node = LeftRotation(node);
@@ -57,7 +57,7 @@ public class BST {
                 }
             }
             else if (node.Bf == 2){ //left-?
-                if (word.charAt(0) < node.l.word.charAt(0)){ //left
+                if (word.compareTo(node.r.word) < 0){ //left
                     System.out.println("Right Rotation Performed!!");
                     if(node == root) root = node.l;
                     node = RightRotation(node);
@@ -143,14 +143,14 @@ public class BST {
         if(node == null){
             System.out.println(word + ": NO");
         }
-        else if (word.charAt(0) == node.word.charAt(0)){
+        else if (word.compareTo(node.word) == 0){
             System.out.println(word + ": YES");
             return node;
         }
-        else if (word.charAt(0) < node.word.charAt(0)){
+        else if (word.compareTo(node.word) < 0){
             node = search(node.l, word);
         }
-        else if (word.charAt(0) > node.word.charAt(0)){
+        else if (word.compareTo(node.word) > 0){
             node = search(node.r, word);
         }
         return node;
@@ -159,12 +159,14 @@ public class BST {
         Node node = this.search(this.root, word);
         //if the word to be deleted is null return
         if(node == null){
+            System.out.println("Node not found");
             return;
         }
         else
         {
             //if the node has no children
             Node parent = node.p;
+            
             if(node.l == null && node.r == null)
             {
                 if(node == this.root)
@@ -177,7 +179,11 @@ public class BST {
                     else{parent.r = null;}
                     node.p = null;
                     this.update_balance_factor(parent);
+                    System.out.println(this.root.Bf);
+                    this.update_balance_factor(this.root);
+                    System.out.println(this.root.Bf);
                     this.balanceDeletion(parent);
+                    this.balanceDeletion(this.root);
                     this.update_height(parent);
                 }
                 return;
@@ -274,11 +280,11 @@ public class BST {
     {
         if (node != null)
         {
-            System.out.print(node.word + " ");
-            if(node.p != null)
-            {
-                System.out.println("parent is "+ node.p.word + " ");
-            }
+            System.out.println(node.word + " balance factor = " + node.Bf);
+            // if(node.p != null)
+            // {
+            //     System.out.println("parent is "+ node.p.word + " ");
+            // }
             preOrder(node.l);
             preOrder(node.r);
         }
