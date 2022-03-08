@@ -2,12 +2,14 @@ public class BST {
 
     public Node root = null;
     public int height;
+    public int size;
 
     private int heightOfInsert; //helping in --> getting the height of the BST
 
     //constructor
     public BST (){
         this.height = -1; // (-1) --> empty tree
+        size = 0;
         this.heightOfInsert = 0;
     }
 
@@ -19,6 +21,7 @@ public class BST {
             //updating the Tree Height
             height = (height < heightOfInsert)? heightOfInsert: height;
             heightOfInsert = 0;
+            size++; //increment the words number
         }
         else{
             heightOfInsert++;

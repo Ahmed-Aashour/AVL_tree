@@ -10,7 +10,7 @@ public class AVL_tree {
         tree.insert(tree.root, "car");
         tree.insert(tree.root, "tack");
         tree.insert(tree.root, "tacj");
-        tree.preOrder(tree.root);
+        tree.insert(tree.root, "tacj");
         tree.insert(tree.root, "fort");
         tree.insert(tree.root, "big");
         tree.insert(tree.root, "bat");
@@ -20,6 +20,7 @@ public class AVL_tree {
         // tree.insert(tree.root, "e");
         // tree.delete("big");
         tree.preOrder(tree.root);
+        System.out.println("#words = " + tree.size);
         // System.out.println("  " + tree.root.word);
         // System.out.println(" / \\");
         // System.out.println(" " + tree.root.l.word + "  " + tree.root.r.word);
