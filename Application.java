@@ -23,6 +23,11 @@ public class Application {
         }
     }
 
+    private void batchLookUp()
+    {
+        
+    }
+
     private void insert(String word)
     {
         this.tree.insert(tree.root, word);

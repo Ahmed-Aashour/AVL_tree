@@ -8,12 +8,11 @@ public class AVL_tree {
     public static void main(String[] args) {
         
         BST tree = new BST();
-        Application app = new Application(tree);
-        app.startApplication();
+        // Application app = new Application(tree);
+        // app.startApplication();
         tree.insert(tree.root, "car");
         tree.insert(tree.root, "tack");
         tree.insert(tree.root, "tacj");
-        tree.preOrder(tree.root);
         tree.insert(tree.root, "fort");
         tree.insert(tree.root, "big");
         tree.insert(tree.root, "bat");
@@ -21,7 +20,7 @@ public class AVL_tree {
         // tree.insert(tree.root, "s");
         // tree.insert(tree.root, "b");
         // tree.insert(tree.root, "e");
-        // tree.delete("big");
+        tree.delete("big");
         tree.preOrder(tree.root);
         // System.out.println("  " + tree.root.word);
         // System.out.println(" / \\");

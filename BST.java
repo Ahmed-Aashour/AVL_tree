@@ -187,12 +187,17 @@ public class BST {
             else
             {
                 Node child = node.l == null? node.r : node.l;
-                child.p = parent;
                 if(node == this.root)
                 {
                     this.root = child;
                     this.root.p = null;
+                    this.update_balance_factor(this.root);
+                    this.balanceDeletion(this.root);
+                    this.update_height(this.root);
+                    return;
                 }
+                node.p = parent;
+                child.p = parent;
                 if(parent.l == node){
                     parent.l = child;   
                 }
@@ -200,7 +205,6 @@ public class BST {
                 node.p = null;
                 this.update_balance_factor(parent);
                 this.balanceDeletion(parent);
-                this.update_height(child);
                 this.update_height(parent);
             }
         }
@@ -211,7 +215,7 @@ public class BST {
         if(node.Bf > 1)
         {
             System.out.print("deletion balance needed for ");
-            System.out.println(node.word);
+            System.out.println(node.word + "  "+ node.Bf);
             if(node.l != null && node.l.Bf >= 0)
             {
                 //left left case do right rotation for this node
@@ -232,21 +236,21 @@ public class BST {
         if(node.Bf < -1)
         {
             System.out.print("deletion balance needed for ");
-            System.out.println(node.word);
-            if(node.r != null && node.r.Bf >= 0)
+            System.out.println(node.word + "  "+ node.Bf);
+            if(node.r != null && node.r.Bf <= 0)
             {
                 //left left case do right rotation for this node
                 this.LeftRotation(node);
                 System.out.println("right right");
 
             }
-            else if(node.r != null && node.r.Bf < 0)
+            else if(node.r != null && node.r.Bf > 0)
             {
                 //left right rotation 
                 //do a left rotation at left child of current node followed
                 //by a right rotation at the current node itself.
                 this.Right_LeftRotation(node);
-                System.out.println("rigth left");
+                System.out.println("right left");
             }
         }
     }
