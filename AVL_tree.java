@@ -10,6 +10,7 @@ public class AVL_tree {
         tree.insert(tree.root, "car");
         tree.insert(tree.root, "tack");
         tree.insert(tree.root, "tacj");
+        tree.preOrder(tree.root);
         tree.insert(tree.root, "fort");
         tree.insert(tree.root, "big");
         tree.insert(tree.root, "bat");

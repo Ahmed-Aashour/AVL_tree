@@ -4,52 +4,42 @@ public class BST {
     public int height;
 
     private int heightOfInsert; //helping in --> getting the height of the BST
-    private int heightOfNode;   //helping in --> getting the height of the nodes(subtree)
 
     //constructor
     public BST (){
         this.height = -1; // (-1) --> empty tree
         this.heightOfInsert = 0;
-        this.heightOfNode = 0;
     }
 
     public Node insert(Node node, String word){
         if(node == null){
             Node newNode = new Node(word);
-            if (height == -1)
-                root = newNode;
-            else
-                node = newNode;
+            if (height == -1) root = newNode;
+            node = newNode;
             //updating the Tree Height
             height = (height < heightOfInsert)? heightOfInsert: height;
             heightOfInsert = 0;
-            heightOfNode = 0;
-            return newNode;
         }
         else{
             heightOfInsert++;
             if (word.compareTo(node.word) < 0){
                 Node lNode = insert(node.l, word); //GOTO left child
-                node.l = lNode; //Parent link
-                lNode.p = node; 
+                node.l = lNode;
+                lNode.p = node; //Parent link 
             }
             else if (word.compareTo(node.word) > 0){
                 Node rNode = insert(node.r, word); //GOTO right child
-                node.r = rNode; //Parent link
-                rNode.p = node;
+                node.r = rNode;
+                rNode.p = node; //Parent link
             }
-            //updating the Node Height (h)
-            heightOfNode++;
-            if (node.h < heightOfNode) node.h = heightOfNode;
-            //updating the Node BalanceFactor (Bf)
-            update_balance_factor(node);
+            update_height(node); //updating the Node Height (h)
+            update_balance_factor(node); //updating the Node BalanceFactor (Bf)
             //performing Rotations
             if (node.Bf == -2){ //right-?
                 if (word.compareTo(node.r.word) > 0){ //right
-                    System.out.println("Left Rotation Performed!!");
+                    System.out.println("Left Rotation Performed!!: " + node.word);
                     if(node == root) root = node.r;
                     node = LeftRotation(node);
-                    // height--;
                 }
                 else{ //left
                     System.out.println("Double: Right-Left Rotation performed!!: " + node.word);
@@ -58,10 +48,9 @@ public class BST {
             }
             else if (node.Bf == 2){ //left-?
                 if (word.compareTo(node.r.word) < 0){ //left
-                    System.out.println("Right Rotation Performed!!");
+                    System.out.println("Right Rotation Performed!!: " + node.word);
                     if(node == root) root = node.l;
                     node = RightRotation(node);
-                    // height--;
                 }
                 else{ //right
                     System.out.println("Double: Left-Right Rotation performed!!: " + node.word);
@@ -69,8 +58,6 @@ public class BST {
                 }
             }
         }
-        update_height(node);
-        if(root == node) height = node.h;
         return node;
     }
 
@@ -82,11 +69,9 @@ public class BST {
         pivot.p = rNode;
         pivot.r = rNode.l;
         rNode.l = pivot;
-        //update the height of both nodes
-        rNode.h = (rNode.r != null)? rNode.r.h + 1: 1;
-        pivot.h -= 2;
-        //update the balance factor of both nodes
-        update_balance_factor(pivot);
+        update_height(pivot); //update the height of both nodes
+        update_height(rNode);
+        update_balance_factor(pivot); //update the balance factor of both nodes
         update_balance_factor(rNode);
         return rNode;
     }
@@ -99,11 +84,9 @@ public class BST {
         pivot.p = lNode;
         pivot.l = lNode.r;
         lNode.r = pivot;
-        //update the height of both nodes
-        lNode.h = (lNode.l != null)? lNode.l.h + 1: 1;
-        pivot.h -= 2;
-        //update the balance factor of both nodes
-        update_balance_factor(pivot);
+        update_height(pivot); //update the height of both nodes
+        update_height(lNode);
+        update_balance_factor(pivot); //update the balance factor of both nodes
         update_balance_factor(lNode);
         return lNode;
     }
@@ -280,7 +263,7 @@ public class BST {
     {
         if (node != null)
         {
-            System.out.println(node.word + " balance factor = " + node.Bf);
+            System.out.println(node.word + " balance factor = " + node.Bf + ", height = " + node.h);
             // if(node.p != null)
             // {
             //     System.out.println("parent is "+ node.p.word + " ");
