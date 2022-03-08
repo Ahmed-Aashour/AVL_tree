@@ -142,6 +142,7 @@ public class BST {
     public Node search(Node node, String word){
         if(node == null){
             System.out.println(word + ": NO");
+            return null;
         }
         else if (word.compareTo(node.word) == 0){
             System.out.println(word + ": YES");
@@ -159,7 +160,7 @@ public class BST {
         Node node = this.search(this.root, word);
         //if the word to be deleted is null return
         if(node == null){
-            System.out.println("Node not found");
+            System.out.println("word not found");
             return;
         }
         else
