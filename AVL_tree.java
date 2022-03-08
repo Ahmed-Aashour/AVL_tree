@@ -20,8 +20,9 @@ public class AVL_tree {
         // tree.insert(tree.root, "s");
         // tree.insert(tree.root, "b");
         // tree.insert(tree.root, "e");
-        tree.delete("big");
+        // tree.delete("bat");
         tree.preOrder(tree.root);
+        System.out.println("#words = " + tree.size);
         // System.out.println("  " + tree.root.word);
         // System.out.println(" / \\");
         // System.out.println(" " + tree.root.l.word + "  " + tree.root.r.word);
