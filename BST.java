@@ -52,7 +52,7 @@ public class BST {
                 }
             }
             else if (node.Bf == 2){ //left-?
-                if (word.compareTo(node.r.word) < 0){ //left
+                if (word.compareTo(node.l.word) < 0){ //left
                     System.out.println("Right Rotation Performed!!: " + node.word);
                     if(node == root) root = node.l;
                     node = RightRotation(node);
