@@ -119,7 +119,7 @@ public class BST {
         if(node == root) root = node.l.r;
         node = this.LeftRotation(node.l);
         node.p.l = node;
-        node = this.RightRotation(node);
+        node = this.RightRotation(node.p);
         return node;
     }
 
