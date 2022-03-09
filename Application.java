@@ -16,16 +16,47 @@ public class Application {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 this.insert(data);
-                System.out.println(data);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("error reading dictionary");
         }
     }
 
     private void batchLookUp()
     {
-        
+        File file = new File("queries.txt");
+        try (Scanner myReader = new Scanner(file)) {
+            int found = 0;
+            int existing = 0;
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if(this.search(data) == null)
+                {
+                    found++;
+                }
+                existing++;
+            }
+            System.out.println("searched for " + existing + " words");
+            System.out.println("found " + found + " words");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("error reading queries");
+        }
+    }
+
+    private void batchDeletions()
+    {
+        File file = new File("deletions.txt");
+        try (Scanner myReader = new Scanner(file)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                this.delete(data);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("error reading deletions");
+        }
     }
 
     private void insert(String word)
@@ -33,9 +64,9 @@ public class Application {
         this.tree.insert(tree.root, word);
     }
 
-    private void search(String word)
+    private Node search(String word)
     {
-        this.tree.search(tree.root, word);
+        return this.tree.search(tree.root, word);
     }
 
     private void delete(String word)
@@ -76,7 +107,7 @@ public class Application {
             }
             else if(operation == 2)
             {
-                //To do
+                System.out.println("there are " + this.tree.size + " words");
             }
             else if(operation == 3 || operation == 4 || operation == 5)
             {
@@ -111,11 +142,11 @@ public class Application {
             }
             else if(operation == 6)
             {
-                
+                this.batchLookUp();
             }
             else if(operation == 7)
             {
-                
+                this.batchDeletions();
             }
             else if(operation == 8)
             {

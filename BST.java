@@ -82,6 +82,10 @@ public class BST {
         pivot.p = rNode;
         pivot.r = rNode.l;
         rNode.l = pivot;
+        if(pivot == this.root)
+        {
+            this.root = rNode;
+        }
         update_height(pivot); //update the height of both nodes
         update_height(rNode);
         update_balance_factor(pivot); //update the balance factor of both nodes
@@ -105,6 +109,10 @@ public class BST {
         pivot.p = lNode;
         pivot.l = lNode.r;
         lNode.r = pivot;
+        if(pivot == this.root)
+        {
+            this.root = lNode;
+        }
         update_height(pivot); //update the height of both nodes
         update_height(lNode);
         update_balance_factor(pivot); //update the balance factor of both nodes
@@ -146,11 +154,13 @@ public class BST {
     //a method to update height and balance of nodes after deletion operation
     private void update_balance_and_height(Node node){
         Node parent = node.p;
+        //if we reached the root
         if(parent == null)
         {
             this.update_balance_factor(node);
             this.balanceDeletion(node);
             this.update_height(node);
+            this.height = node.h;
             return;
         }
         this.update_balance_factor(node);
@@ -198,7 +208,6 @@ public class BST {
                     if(parent.l == node){parent.l = null;}
                     else{parent.r = null;}
                     node.p = null;
-                    parent.h--;
                     this.update_balance_and_height(parent);
                 }
                 this.size--;
@@ -229,7 +238,6 @@ public class BST {
                 }
                 else{parent.r = child;}
                 node.p = null;
-                parent.h--;
                 this.update_balance_and_height(parent);
                 this.size--;
             }
