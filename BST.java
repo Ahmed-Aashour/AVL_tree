@@ -73,9 +73,11 @@ public class BST {
         rNode.l = pivot;
         if(pivot == this.root)
             this.root = rNode;
-        update_height(pivot); //update the height of both nodes
+        //update the height of both nodes
+        update_height(pivot);
         update_height(rNode);
-        update_balance_factor(pivot); //update the balance factor of both nodes
+        //update the balance factor of both nodes
+        update_balance_factor(pivot);
         update_balance_factor(rNode);
         return rNode;
     }
@@ -96,9 +98,11 @@ public class BST {
         lNode.r = pivot;
         if(pivot == this.root)
             this.root = lNode;
-        update_height(pivot); //update the height of both nodes
+        //update the height of both nodes
+        update_height(pivot);
         update_height(lNode);
-        update_balance_factor(pivot); //update the balance factor of both nodes
+        //update the balance factor of both nodes
+        update_balance_factor(pivot);
         update_balance_factor(lNode);
         return lNode;
     }
