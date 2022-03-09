@@ -32,7 +32,8 @@ public class BST {
             }
             update_height(node); //updating the Node Height (h)
             update_balance_factor(node); //updating the Node BalanceFactor (Bf)
-            //performing Rotations/////////////////////////////////////////////
+
+            //performing Rotations, if any/////////////////////////////////////
             if (node.Bf == -2){ //right-?
                 if (word.compareTo(node.r.word) > 0){ //right-right insertion
                     if(node == root) root = node.r;
@@ -152,16 +153,16 @@ public class BST {
 
     // a method that searches for a string in the tree
     public Node search(Node node, String word){
-        if(node == null){
+        if(node == null){ //Not Found ):
             return null;
         }
-        else if (word.compareTo(node.word) == 0){
+        else if (word.compareTo(node.word) == 0){ //Found (;
             return node;
         }
-        else if (word.compareTo(node.word) < 0){
+        else if (word.compareTo(node.word) < 0){ //go left
             node = search(node.l, word);
         }
-        else if (word.compareTo(node.word) > 0){
+        else if (word.compareTo(node.word) > 0){ //go right
             node = search(node.r, word);
         }
         return node;
