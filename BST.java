@@ -11,15 +11,15 @@ public class BST {
     }
 
     public Node insert(Node node, String word){
-        if(node == null){
+        if(node == null){ //Not found, so insert it
             Node newNode = new Node(word);
-            if (height == -1) root = newNode;
+            if (height == -1) root = newNode; //empty tree
             node = newNode;
             size++; //increment the words number
         }
-        else if (word.compareTo(node.word) == 0){
-            System.out.println(word + " :Already exist!!");}
-        else{
+        else if (word.compareTo(node.word) == 0){ //word inserted before
+            System.out.println("ERROR: " + word + " Already exist!!");}
+        else{ //go down the tree
             if (word.compareTo(node.word) < 0){
                 Node lNode = insert(node.l, word); //GOTO left child
                 node.l = lNode;
@@ -34,30 +34,30 @@ public class BST {
             update_balance_factor(node); //updating the Node BalanceFactor (Bf)
             //performing Rotations
             if (node.Bf == -2){ //right-?
-                if (word.compareTo(node.r.word) > 0){ //right
-                    System.out.println("Left Rotation Performed!!: " + node.word);
+                if (word.compareTo(node.r.word) > 0){ //right-right
+                    System.out.println("Left Rotation on " + node.word);
                     if(node == root) root = node.r;
                     node = LeftRotation(node);
                 }
-                else{ //left
-                    System.out.println("Double: Right-Left Rotation performed!!: " + node.word);
+                else{ //right-left
+                    System.out.println("Double: Right-Left Rotation on " + node.word);
                     node = Right_LeftRotation(node);
                 }
             }
             else if (node.Bf == 2){ //left-?
-                if (word.compareTo(node.l.word) < 0){ //left
-                    System.out.println("Right Rotation Performed!!: " + node.word);
+                if (word.compareTo(node.l.word) < 0){ //left-left
+                    System.out.println("Right Rotation on " + node.word);
                     if(node == root) root = node.l;
                     node = RightRotation(node);
                 }
-                else{ //right
-                    System.out.println("Double: Left-Right Rotation performed!!: " + node.word);
+                else{ //left-right
+                    System.out.println("Double: Left-Right Rotation on " + node.word);
                     node = Left_RightRotation(node);
                 }
             }
         }
-        //updating the Tree Height
-        if(node == root) height = node.h;
+        if(node == root) //update the Tree Height
+            height = node.h;
         return node;
     }
 
