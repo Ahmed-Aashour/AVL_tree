@@ -71,6 +71,14 @@ public class BST {
         Node rNode = node.r;
         if(rNode.l != null) rNode.l.p = pivot;
         rNode.p = pivot.p;
+        if(rNode.p != null && rNode.p.l == pivot)
+        {
+            rNode.p.l = rNode;
+        }
+        if(rNode.p != null && rNode.p.r == pivot)
+        {
+            rNode.p.r = rNode;
+        }
         pivot.p = rNode;
         pivot.r = rNode.l;
         rNode.l = pivot;
@@ -86,6 +94,14 @@ public class BST {
         Node lNode = node.l;
         if(lNode.r != null) lNode.r.p = pivot;
         lNode.p = pivot.p;
+        if(lNode.p != null && lNode.p.l == pivot)
+        {
+            lNode.p.l = lNode;
+        }
+        if(lNode.p != null && lNode.p.r == pivot)
+        {
+            lNode.p.r = lNode;
+        }
         pivot.p = lNode;
         pivot.l = lNode.r;
         lNode.r = pivot;
@@ -127,6 +143,22 @@ public class BST {
         else                     node.Bf = node.l.h - node.r.h; //general case
     }
 
+    //a method to update height and balance of nodes after deletion operation
+    private void update_balance_and_height(Node node){
+        Node parent = node.p;
+        if(parent == null)
+        {
+            this.update_balance_factor(node);
+            this.balanceDeletion(node);
+            this.update_height(node);
+            return;
+        }
+        this.update_balance_factor(node);
+        this.balanceDeletion(node);
+        this.update_height(node);
+        this.update_balance_and_height(parent);
+    }
+
     public Node search(Node node, String word){
         if(node == null){
             System.out.println(word + ": NO");
@@ -155,7 +187,6 @@ public class BST {
         {
             //if the node has no children
             Node parent = node.p;
-            
             if(node.l == null && node.r == null)
             {
                 if(node == this.root)
@@ -167,15 +198,10 @@ public class BST {
                     if(parent.l == node){parent.l = null;}
                     else{parent.r = null;}
                     node.p = null;
-                    this.update_balance_factor(parent);
-                    System.out.println(this.root.Bf);
-                    this.update_balance_factor(this.root);
-                    System.out.println(this.root.Bf);
-                    this.balanceDeletion(parent);
-                    this.balanceDeletion(this.root);
-                    this.update_height(parent);
+                    parent.h--;
+                    this.update_balance_and_height(parent);
                 }
-                return;
+                this.size--;
             }
             //if the node have two children the successor wil be the minimum value in the right subtree
             else if(node.l != null && node.r != null)
@@ -184,9 +210,6 @@ public class BST {
                 String temp = successor.word;
                 this.delete(successor.word);
                 node.word = temp;
-                this.update_balance_factor(node);
-                this.balanceDeletion(node);
-                this.update_height(node);
             }
             //if the node have only one child
             else
@@ -196,9 +219,7 @@ public class BST {
                 {
                     this.root = child;
                     this.root.p = null;
-                    this.update_balance_factor(this.root);
-                    this.balanceDeletion(this.root);
-                    this.update_height(this.root);
+                    this.root.h--;
                     return;
                 }
                 node.p = parent;
@@ -208,12 +229,11 @@ public class BST {
                 }
                 else{parent.r = child;}
                 node.p = null;
-                this.update_balance_factor(parent);
-                this.balanceDeletion(parent);
-                this.update_height(parent);
+                parent.h--;
+                this.update_balance_and_height(parent);
+                this.size--;
             }
         }
-        this.size--;
     }
 
     private void balanceDeletion(Node node)
