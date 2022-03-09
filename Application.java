@@ -49,7 +49,6 @@ public class Application {
 
     private void batchDeletions()
     {
-        // this.tree.preOrder(this.search("abs").p);
         File file = new File("deletions.txt");
         try (Scanner myReader = new Scanner(file)) {
             
@@ -58,7 +57,6 @@ public class Application {
                 data = data.replace("\n", "").replace("\r", "");
                 
                 this.delete(data);
-                // this.tree.preOrder(tree.root);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
