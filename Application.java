@@ -98,12 +98,11 @@ public class Application {
             System.out.println("8- Exit");
 
             try {
-                operation = myReader.nextInt();
+                operation = Integer.parseInt(myReader.nextLine());
                 if(operation < 1 || operation > 8)
                 {
                     throw new Exception();
                 }
-                myReader.nextLine();
             } catch (Exception e) {
                 System.out.println("Invalid input. Enter a number between 1 and 8");
                 continue;
