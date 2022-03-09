@@ -4,13 +4,10 @@ public class BST {
     public int height;
     public int size;
 
-    private int heightOfInsert; //helping in --> getting the height of the BST
-
     //constructor
     public BST (){
         this.height = -1; // (-1) --> empty tree
         size = 0;
-        this.heightOfInsert = 0;
     }
 
     public Node insert(Node node, String word){
@@ -18,15 +15,11 @@ public class BST {
             Node newNode = new Node(word);
             if (height == -1) root = newNode;
             node = newNode;
-            //updating the Tree Height
-            height = (height < heightOfInsert)? heightOfInsert: height;
-            heightOfInsert = 0;
             size++; //increment the words number
         }
         else if (word.compareTo(node.word) == 0){
             System.out.println(word + " :Already exist!!");}
         else{
-            heightOfInsert++;
             if (word.compareTo(node.word) < 0){
                 Node lNode = insert(node.l, word); //GOTO left child
                 node.l = lNode;
@@ -63,6 +56,8 @@ public class BST {
                 }
             }
         }
+        //updating the Tree Height
+        if(node == root) height = node.h;
         return node;
     }
 
