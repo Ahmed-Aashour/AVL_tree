@@ -146,7 +146,7 @@ public class BST {
         else                     node.Bf = node.l.h - node.r.h; //general case
     }
 
-    //a method to update height and balance of nodes after deletion operation
+    //a method to update height and balance of the node's ancestors after deletion operation
     private void update_balance_and_height(Node node){
         Node parent = node.p;
         //if we reached the root
@@ -162,14 +162,12 @@ public class BST {
         this.balanceDeletion(node);
         this.update_balance_and_height(parent);
     }
-
+    // a method that searches for a string in the tree
     public Node search(Node node, String word){
         if(node == null){
-            System.out.println(word + ": NO");
             return null;
         }
         else if (word.compareTo(node.word) == 0){
-            System.out.println(word + ": YES");
             return node;
         }
         else if (word.compareTo(node.word) < 0){
@@ -240,18 +238,16 @@ public class BST {
         this.height = this.root.h;
     }
 
+    // a helper method to balance the nodes after deletion according to the balance factors
     private void balanceDeletion(Node node)
     {
+        //left case
         if(node.Bf > 1)
         {
-            System.out.print("deletion balance needed for ");
-            System.out.println(node.word + "  "+ node.Bf);
             if(node.l != null && node.l.Bf >= 0)
             {
                 //left left case do right rotation for this node
                 this.RightRotation(node);
-                System.out.println("left left");
-
             }
             else if(node.l != null && node.l.Bf < 0)
             {
@@ -259,32 +255,28 @@ public class BST {
                 //do a left rotation at left child of current node followed
                 //by a right rotation at the current node itself.
                 this.Left_RightRotation(node);
-                System.out.println("left right");
             }
         }
 
+        //right case
         if(node.Bf < -1)
         {
-            System.out.print("deletion balance needed for ");
-            System.out.println(node.word + "  "+ node.Bf);
             if(node.r != null && node.r.Bf <= 0)
             {
-                //left left case do right rotation for this node
+                //right right case do right rotation for this node
                 this.LeftRotation(node);
-                System.out.println("right right");
-
             }
             else if(node.r != null && node.r.Bf > 0)
             {
-                //left right rotation 
-                //do a left rotation at left child of current node followed
-                //by a right rotation at the current node itself.
+                //right left rotation 
+                //do a right rotation at left child of current node followed
+                //by a left rotation at the current node itself.
                 this.Right_LeftRotation(node);
-                System.out.println("right left");
             }
         }
     }
 
+    // a method that finds the minimum element in a subtree
     private Node findMin(Node node)
     {
         Node current = node;
@@ -293,20 +285,4 @@ public class BST {
  
         return current;
     }
-
-    // method used for debuggig purpose only
-    public void preOrder(Node node)
-    {
-        if (node != null)
-        {
-            System.out.println(node.word + " balance factor = " + node.Bf + ", height = " + node.h);
-            // if(node.p != null)
-            // {
-            //     System.out.println("parent is "+ node.p.word + " ");
-            // }
-            preOrder(node.l);
-            preOrder(node.r);
-        }
-    }
-
 }

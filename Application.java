@@ -73,7 +73,15 @@ public class Application {
 
     private Node search(String word)
     {
-        return this.tree.search(tree.root, word);
+        Node node =  this.tree.search(tree.root, word);
+        if(node == null){
+            System.out.println(word + ": NO");
+        }
+        else
+        {
+            System.out.println(word + ": YES");
+        }
+        return node;
     }
 
     private void delete(String word)
