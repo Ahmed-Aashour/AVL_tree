@@ -18,7 +18,7 @@ public class BST {
             size++; //increment the words number
         }
         else if (word.compareTo(node.word) == 0){ //word inserted before
-            System.out.println("ERROR: " + word + " Already exist!!");}
+            System.out.println("ERROR: \"" + word + "\" is Already exist!!");}
         else{ //go down the tree
             if (word.compareTo(node.word) < 0){
                 Node lNode = insert(node.l, word); //GOTO left child
@@ -32,55 +32,46 @@ public class BST {
             }
             update_height(node); //updating the Node Height (h)
             update_balance_factor(node); //updating the Node BalanceFactor (Bf)
-            //performing Rotations
+            //performing Rotations/////////////////////////////////////////////
             if (node.Bf == -2){ //right-?
-                if (word.compareTo(node.r.word) > 0){ //right-right
-                    System.out.println("Left Rotation on " + node.word);
+                if (word.compareTo(node.r.word) > 0){ //right-right insertion
                     if(node == root) root = node.r;
                     node = LeftRotation(node);
                 }
-                else{ //right-left
-                    System.out.println("Double: Right-Left Rotation on " + node.word);
+                else{ //right-left insertion
                     node = Right_LeftRotation(node);
                 }
             }
             else if (node.Bf == 2){ //left-?
-                if (word.compareTo(node.l.word) < 0){ //left-left
-                    System.out.println("Right Rotation on " + node.word);
+                if (word.compareTo(node.l.word) < 0){ //left-left insertion
                     if(node == root) root = node.l;
                     node = RightRotation(node);
                 }
-                else{ //left-right
-                    System.out.println("Double: Left-Right Rotation on " + node.word);
+                else{ //left-right insertion
                     node = Left_RightRotation(node);
                 }
             }
         }
-        if(node == root) //update the Tree Height
-            height = node.h;
+        this.height = this.root.h; //update the Tree Height
         return node;
     }
 
     private Node LeftRotation(Node node) {
         Node pivot = node;
-        Node rNode = node.r;
-        if(rNode.l != null) rNode.l.p = pivot;
+        Node rNode = node.r; //right node of the pivot
+        //change the pointers of (both nodes & parent nodes properly)
+        if(rNode.l != null)
+            rNode.l.p = pivot;
         rNode.p = pivot.p;
         if(rNode.p != null && rNode.p.l == pivot)
-        {
             rNode.p.l = rNode;
-        }
         if(rNode.p != null && rNode.p.r == pivot)
-        {
             rNode.p.r = rNode;
-        }
         pivot.p = rNode;
         pivot.r = rNode.l;
         rNode.l = pivot;
         if(pivot == this.root)
-        {
             this.root = rNode;
-        }
         update_height(pivot); //update the height of both nodes
         update_height(rNode);
         update_balance_factor(pivot); //update the balance factor of both nodes
@@ -90,24 +81,20 @@ public class BST {
 
     private Node RightRotation(Node node) {
         Node pivot = node;
-        Node lNode = node.l;
-        if(lNode.r != null) lNode.r.p = pivot;
+        Node lNode = node.l; //left node of the pivot
+        //change the pointers of (both nodes & parent nodes properly)
+        if(lNode.r != null)
+            lNode.r.p = pivot;
         lNode.p = pivot.p;
         if(lNode.p != null && lNode.p.l == pivot)
-        {
             lNode.p.l = lNode;
-        }
         if(lNode.p != null && lNode.p.r == pivot)
-        {
             lNode.p.r = lNode;
-        }
         pivot.p = lNode;
         pivot.l = lNode.r;
         lNode.r = pivot;
         if(pivot == this.root)
-        {
             this.root = lNode;
-        }
         update_height(pivot); //update the height of both nodes
         update_height(lNode);
         update_balance_factor(pivot); //update the balance factor of both nodes
@@ -118,7 +105,7 @@ public class BST {
     private Node Left_RightRotation(Node node) {
         if(node == root) root = node.l.r;
         node = this.LeftRotation(node.l);
-        node.p.l = node;
+        node.p.l = node; //attach the resulting tree to the pivot
         node = this.RightRotation(node.p);
         return node;
     }
@@ -126,7 +113,7 @@ public class BST {
     private Node Right_LeftRotation(Node node) {
         if(node == root) root = node.r.l;
         node = this.RightRotation(node.r);
-        node.p.r = node;
+        node.p.r = node; //attach the resulting tree to the pivot
         node = this.LeftRotation(node.p);
         return node;
     }
@@ -162,6 +149,7 @@ public class BST {
         this.balanceDeletion(node);
         this.update_balance_and_height(parent);
     }
+
     // a method that searches for a string in the tree
     public Node search(Node node, String word){
         if(node == null){
@@ -178,6 +166,7 @@ public class BST {
         }
         return node;
     }
+
     public void delete(String word){
         Node node = this.search(this.root, word);
         //if the word to be deleted is null return
