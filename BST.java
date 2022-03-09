@@ -4,13 +4,10 @@ public class BST {
     public int height;
     public int size;
 
-    private int heightOfInsert; //helping in --> getting the height of the BST
-
     //constructor
     public BST (){
         this.height = -1; // (-1) --> empty tree
         size = 0;
-        this.heightOfInsert = 0;
     }
 
     public Node insert(Node node, String word){
@@ -18,15 +15,11 @@ public class BST {
             Node newNode = new Node(word);
             if (height == -1) root = newNode;
             node = newNode;
-            //updating the Tree Height
-            height = (height < heightOfInsert)? heightOfInsert: height;
-            heightOfInsert = 0;
             size++; //increment the words number
         }
         else if (word.compareTo(node.word) == 0){
             System.out.println(word + " :Already exist!!");}
         else{
-            heightOfInsert++;
             if (word.compareTo(node.word) < 0){
                 Node lNode = insert(node.l, word); //GOTO left child
                 node.l = lNode;
@@ -63,6 +56,8 @@ public class BST {
                 }
             }
         }
+        //updating the Tree Height
+        if(node == root) height = node.h;
         return node;
     }
 
@@ -122,17 +117,17 @@ public class BST {
 
     private Node Left_RightRotation(Node node) {
         if(node == root) root = node.l.r;
-        node = LeftRotation(node.l);
+        node = this.LeftRotation(node.l);
         node.p.l = node;
-        node = RightRotation(node.p);
+        node = this.RightRotation(node);
         return node;
     }
 
     private Node Right_LeftRotation(Node node) {
         if(node == root) root = node.r.l;
-        node = RightRotation(node.r);
+        node = this.RightRotation(node.r);
         node.p.r = node;
-        node = LeftRotation(node.p);
+        node = this.LeftRotation(node.p);
         return node;
     }
     private void update_height(Node node){
@@ -160,7 +155,6 @@ public class BST {
             this.update_balance_factor(node);
             this.balanceDeletion(node);
             this.update_height(node);
-            this.height = node.h;
             return;
         }
         this.update_balance_factor(node);
@@ -229,18 +223,21 @@ public class BST {
                     this.root = child;
                     this.root.p = null;
                     this.root.h--;
-                    return;
                 }
-                child.p = parent;
-                if(parent.l == node){
-                    parent.l = child;   
+                else
+                {
+                    child.p = parent;
+                    if(parent.l == node){
+                        parent.l = child;   
+                    }
+                    else{parent.r = child;}
+                    node.p = null;
+                    this.update_balance_and_height(parent);
+                    this.size--;
                 }
-                else{parent.r = child;}
-                node.p = null;
-                this.update_balance_and_height(parent);
-                this.size--;
             }
         }
+        this.height = this.root.h;
     }
 
     private void balanceDeletion(Node node)

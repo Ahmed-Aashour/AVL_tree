@@ -64,7 +64,6 @@ public class Application {
             e.printStackTrace();
             System.out.println("error reading deletions");
         }
-        System.out.println("error reading deletions");
     }
 
     private void insert(String word)

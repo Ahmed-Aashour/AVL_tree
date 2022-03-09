@@ -11,7 +11,7 @@ public class AVL_tree {
         Application app = new Application(tree);
         app.startApplication();
         // tree.insert(tree.root, "car");
-        // tree.insert(tree.root, "car");
+        // tree.insert(tree.root, "tack");
         // tree.insert(tree.root, "tacj");
         // tree.insert(tree.root, "fort");
         // tree.insert(tree.root, "big");
@@ -21,9 +21,11 @@ public class AVL_tree {
         // tree.insert(tree.root, "gg");
         // tree.insert(tree.root, "e");
         // tree.delete("big");
-        // tree.delete("car");
+        // tree.delete("bat");
+        // tree.delete("e");
         // tree.preOrder(tree.root);
         // System.out.println("#words = " + tree.size);
+        // System.out.println("Height of AVL tree = " + tree.height);
         // System.out.println("  " + tree.root.word);
         // System.out.println(" / \\");
         // System.out.println(" " + tree.root.l.word + "  " + tree.root.r.word);
