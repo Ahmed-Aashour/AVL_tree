@@ -49,8 +49,8 @@ public class Application {
 
     private void batchDeletions()
     {
+        // this.tree.preOrder(this.search("abs").p);
         File file = new File("deletions.txt");
-        Node n = this.search("abroad");
         try (Scanner myReader = new Scanner(file)) {
             
             while (myReader.hasNextLine()) {

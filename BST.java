@@ -152,14 +152,14 @@ public class BST {
         //if we reached the root
         if(parent == null)
         {
+            this.update_height(node);
             this.update_balance_factor(node);
             this.balanceDeletion(node);
-            this.update_height(node);
             return;
         }
+        this.update_height(node);
         this.update_balance_factor(node);
         this.balanceDeletion(node);
-        this.update_height(node);
         this.update_balance_and_height(parent);
     }
 
@@ -287,10 +287,11 @@ public class BST {
 
     private Node findMin(Node node)
     {
-        if(node.l != null){
-            node = node.l;
-        }
-        return node;
+        Node current = node;
+        while (current.l != null)
+        current = current.l;
+ 
+        return current;
     }
 
     // method used for debuggig purpose only
