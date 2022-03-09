@@ -190,7 +190,7 @@ public class BST {
         Node node = this.search(this.root, word);
         //if the word to be deleted is null return
         if(node == null){
-            System.out.println("word not found");
+            System.out.println(word + " not found");
             return;
         }
         else
@@ -212,7 +212,7 @@ public class BST {
                 }
                 this.size--;
             }
-            //if the node have two children the successor wil be the minimum value in the right subtree
+            //if the node has two children the successor wil be the minimum value in the right subtree
             else if(node.l != null && node.r != null)
             {
                 Node successor = this.findMin(node.r);
@@ -220,7 +220,7 @@ public class BST {
                 this.delete(successor.word);
                 node.word = temp;
             }
-            //if the node have only one child
+            //if the node has only one child
             else
             {
                 Node child = node.l == null? node.r : node.l;
@@ -231,7 +231,6 @@ public class BST {
                     this.root.h--;
                     return;
                 }
-                node.p = parent;
                 child.p = parent;
                 if(parent.l == node){
                     parent.l = child;   

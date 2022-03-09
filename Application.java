@@ -15,6 +15,7 @@ public class Application {
         try (Scanner myReader = new Scanner(file)) {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
+                data = data.replace("\n", "").replace("\r", "");
                 this.insert(data);
             }
         } catch (FileNotFoundException e) {
@@ -31,7 +32,8 @@ public class Application {
             int existing = 0;
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                if(this.search(data) == null)
+                data = data.replace("\n", "").replace("\r", "");
+                if(this.search(data) != null)
                 {
                     found++;
                 }
@@ -48,15 +50,21 @@ public class Application {
     private void batchDeletions()
     {
         File file = new File("deletions.txt");
+        Node n = this.search("abroad");
         try (Scanner myReader = new Scanner(file)) {
+            
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
+                data = data.replace("\n", "").replace("\r", "");
+                
                 this.delete(data);
+                // this.tree.preOrder(tree.root);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("error reading deletions");
         }
+        System.out.println("error reading deletions");
     }
 
     private void insert(String word)
@@ -96,6 +104,7 @@ public class Application {
                 {
                     throw new Exception();
                 }
+                myReader.nextLine();
             } catch (Exception e) {
                 System.out.println("Invalid input. Enter a number between 1 and 8");
                 continue;
