@@ -24,6 +24,7 @@ public class AVL_tree {
         tree.delete("bat");
         tree.preOrder(tree.root);
         System.out.println("#words = " + tree.size);
+        System.out.println("Height of AVL tree = " + tree.height);
         // System.out.println("  " + tree.root.word);
         // System.out.println(" / \\");
         // System.out.println(" " + tree.root.l.word + "  " + tree.root.r.word);
