@@ -198,7 +198,7 @@ public class BST {
                 }
                 this.size--;
             }
-            //if the node has two children the successor wil be the minimum value in the right subtree
+            //if the node has two children the successor will be the minimum value in the right subtree
             else if(node.l != null && node.r != null)
             {
                 Node successor = this.findMin(node.r);
