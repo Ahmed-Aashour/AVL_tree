@@ -53,7 +53,7 @@ public class BST {
                 }
             }
         }
-        this.height = (this.root == null) ? -1 : this.root.h; //update the Tree Height
+        this.height = this.root.h; //update the Tree Height
         return node;
     }
 
