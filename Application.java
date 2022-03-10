@@ -93,7 +93,7 @@ public class Application {
         int operation = 0;
         while(true)
         {
-            System.out.println("Enter operation number: ");
+            System.out.println("---------------------------------------------");
             System.out.println("1- Load");
             System.out.println("2- Print dictionary size");
             System.out.println("3- Insert a word");
@@ -102,6 +102,7 @@ public class Application {
             System.out.println("6- Batch Look-ups");
             System.out.println("7- Batch Deletions");
             System.out.println("8- Exit");
+            System.out.print("Enter operation number: ");
 
             try {
                 operation = Integer.parseInt(myReader.nextLine());
