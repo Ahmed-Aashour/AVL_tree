@@ -229,7 +229,7 @@ public class BST {
                 }
             }
         }
-        this.height = this.root.h;
+        this.height = this.root == null ? 0 : this.root.h;
     }
 
     // a helper method to balance the nodes after deletion according to the balance factors
